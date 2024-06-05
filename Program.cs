@@ -3,46 +3,55 @@ using Api.Repositorios;
 using Api.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddEntityFrameworkSqlServer()
-    .AddDbContext<Contexto>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
-    );
-
-builder.Services.AddScoped <IUsersRepositorio, UsersRepositorio>();
-
-builder.Services.AddCors(options =>
+internal class Program
 {
-    options.AddDefaultPolicy(
-        policy =>
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        builder.Services.AddEntityFrameworkSqlServer()
+            .AddDbContext<Contexto>(
+            options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            );
+
+        builder.Services.AddScoped<IUsersRepositorio, UsersRepositorio>();
+        builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+        builder.Services.AddScoped<IAnimalRepositorio, AnimalRepositorio>();
+        builder.Services.AddScoped<IObservacoesRepositorio, ObservacoesRepositorio>();
+
+        builder.Services.AddCors(options =>
         {
-            policy.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            options.AddDefaultPolicy(
+                policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
         });
-});
 
-var app = builder.Build();
+        var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.UseCors();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.UseCors();
-
-app.MapControllers();
-
-app.Run();
