@@ -1,6 +1,6 @@
 ﻿namespace Api.Models
 {
-    public class ObservacoesModel
+    public class CuidadosModel
     {
         public int ObservacoesId { get; set; }
 
@@ -10,7 +10,7 @@
 
         public DateTime ObservacaoData { get; set; }
 
-        public static implicit operator List<object>(ObservacoesModel v)
+        public static implicit operator List<object>(CuidadosModel v)
         {
             throw new NotImplementedException();
         }

@@ -21,9 +21,9 @@ internal class Program
             );
 
         builder.Services.AddScoped<IUsersRepositorio, UsersRepositorio>();
-        builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-        builder.Services.AddScoped<IAnimalRepositorio, AnimalRepositorio>();
-        builder.Services.AddScoped<IObservacoesRepositorio, ObservacoesRepositorio>();
+        builder.Services.AddScoped<ICatalogoRepositorio, CatalogoRepositorio>();
+        builder.Services.AddScoped<IMinhasPlantasRepositorio, MinhasPlantasRepositorio>();
+        builder.Services.AddScoped<IRelatorioRepositorio, RelatorioRepositorio>();
 
         builder.Services.AddCors(options =>
         {
