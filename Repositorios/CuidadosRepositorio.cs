@@ -17,49 +17,50 @@ namespace Api.Repositorios
 
         public async Task<List<CuidadosModel>> GetAll()
         {
-            return await _dbContext.cuidados.ToListAsync();
+            return await _dbContext.Cuidados.ToListAsync();
         }
 
         public async Task<CuidadosModel> GetById(int id)
         {
-            return await _dbContext.Cuidados.FirstOrDefaultAsync(x => x.ObservacoesId == id);
+            return await _dbContext.Cuidados.FirstOrDefaultAsync(x => x.CuidadosId == id);
         }
 
-        public async Task<CuidadosModel> InsertObservacoes(CuidadosModel observacoes)
+        public async Task<CuidadosModel> InsertCuidados(CuidadosModel cuidados)
         {
-            await _dbContext.Cuidados.AddAsync(observacoes);
+            await _dbContext.Cuidados.AddAsync(cuidados);
             await _dbContext.SaveChangesAsync();
-            return observacoes;
+            return cuidados;
         }
 
-        public async Task<CuidadosModel> UpdateObservacoes(CuidadosModel observacao, int id)
+        public async Task<CuidadosModel> UpdateCuidados(CuidadosModel cuidados, int id)
         {
-            CuidadosModel observacoes = await GetById(id);
-            if (observacoes == null)
+            CuidadosModel cuidado = await GetById(id);
+            if (cuidados == null)
             {
                 throw new Exception("Não encontrado.");
             }
             else
             {
-                observacoes.ObservacoesDescri = observacao.ObservacoesDescri;
-                observacoes.ObservacaoLocal = observacao.ObservacaoLocal;
-                observacoes.ObservacaoData = observacao.ObservacaoData;
-                _dbContext.Cuidados.Update(observacoes);
+                cuidados.CuidadosBriófitas = cuidado.CuidadosBriófitas;
+                cuidados.CuidadosPteridófitas = cuidado.CuidadosPteridófitas;
+                cuidado.CuidadosGimnospermas = cuidado.CuidadosGimnospermas;
+                cuidados.CuidadosAngiospermas = cuidado.CuidadosAngiospermas;
+                _dbContext.Cuidados.Update(cuidados);
                 await _dbContext.SaveChangesAsync();
             }
-            return observacoes;
+            return cuidados;
 
         }
 
-        public async Task<bool> DeleteObservacoes(int id)
+        public async Task<bool> DeleteCuidados(int id)
         {
-            CuidadosModel observacoes = await GetById(id);
-            if (observacoes == null)
+            CuidadosModel cuidados = await GetById(id);
+            if (cuidados == null)
             {
                 throw new Exception("Não encontrado.");
             }
 
-            _dbContext.Observacoes.Remove(observacoes);
+            _dbContext.Cuidados.Remove(cuidados);
             await _dbContext.SaveChangesAsync();
             return true;
         }

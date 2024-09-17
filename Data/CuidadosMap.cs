@@ -8,10 +8,11 @@ namespace Api.Data
     {
         public void Configure(EntityTypeBuilder<CuidadosModel> builder)
         {
-            builder.HasKey(x => x.ObservacoesId);
-            builder.Property(x => x.ObservacoesDescri).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.ObservacaoLocal).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.ObservacaoData).IsRequired();
+            builder.HasKey(x => x.CuidadosId);
+            builder.Property(x => x.CuidadosBriófitas).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.CuidadosPteridófitas).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.CuidadosGimnospermas).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.CuidadosAngiospermas).IsRequired().HasMaxLength(255);
         }
     }
 }

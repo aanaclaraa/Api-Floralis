@@ -2,7 +2,6 @@
 using Api.Models;
 using Api.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace Api.Repositorios
 {
@@ -10,9 +9,9 @@ namespace Api.Repositorios
     {
         private readonly Contexto _dbContext;
 
-        public RelatorioRepositorio (Contexto dbContext)
+        public RelatorioRepositorio(Contexto dbCotext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbCotext;
         }
 
         public async Task<List<RelatorioModel>> GetAll()
@@ -25,42 +24,41 @@ namespace Api.Repositorios
             return await _dbContext.Relatorio.FirstOrDefaultAsync(x => x.RelatorioId == id);
         }
 
-        public async Task<RelatorioModel> InsertUser(RelatorioModel relatorio)
+        public async Task<RelatorioModel> InsertRelatorio(RelatorioModel relatorio)
         {
             await _dbContext.Relatorio.AddAsync(relatorio);
             await _dbContext.SaveChangesAsync();
             return relatorio;
+
         }
 
-        public async Task<RelatorioModel> UpdateRelatorio(RelatorioModel relatorio, int id)
+        public async Task<RelatorioModel> UpdateRelatorio(RelatorioModel relatorios, int id)
         {
-            RelatorioModel relatorios = await GetById(id);
-            if(relatorios == null)
+            RelatorioModel relatorio = await GetById(id);
+            if (relatorio == null)
             {
                 throw new Exception("Não encontrado.");
             }
             else
             {
-                relatorios.RelatorioDescricao = relatorio.RelatorioDescricao;
+                relatorios.RelatorioDescricao = relatorios.RelatorioDescricao;
                 _dbContext.Relatorio.Update(relatorios);
                 await _dbContext.SaveChangesAsync();
             }
             return relatorios;
-           
         }
 
         public async Task<bool> DeleteRelatorio(int id)
         {
-            RelatorioModel relatorios = await GetById(id);
-            if (relatorios == null)
+            RelatorioModel relatorio = await GetById(id);
+            if (relatorio == null)
             {
                 throw new Exception("Não encontrado.");
             }
 
-            _dbContext.Relatorio.Remove(relatorios);
+            _dbContext.Relatorio.Remove(relatorio);
             await _dbContext.SaveChangesAsync();
             return true;
-        }    
-       
+        }
     }
 }
