@@ -8,7 +8,7 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CuidadosController : ControllerBase
+    public class  CuidadosController : ControllerBase
     {
         private readonly ICuidadosRepositorio _cuidadosRepositorio;
 

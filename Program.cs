@@ -21,6 +21,7 @@ internal class Program
             );
 
         builder.Services.AddScoped<IUsersRepositorio, UsersRepositorio>();
+        builder.Services.AddScoped<ICuidadosRepositorio, CuidadosRepositorio>();
         builder.Services.AddScoped<ICatalogoRepositorio, CatalogoRepositorio>();
         builder.Services.AddScoped<IMinhasPlantasRepositorio, MinhasPlantasRepositorio>();
         builder.Services.AddScoped<IRelatorioRepositorio, RelatorioRepositorio>();

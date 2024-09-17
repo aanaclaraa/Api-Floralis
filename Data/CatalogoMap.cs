@@ -9,7 +9,7 @@ namespace Api.Data
         public void Configure(EntityTypeBuilder<CatalogoModel> builder)
         {
             builder.HasKey(x => x.CatalogoId);
-            builder.Property(x => x.CatalogoName).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.CatalogotName).IsRequired().HasMaxLength(255);
             builder.Property(x => x.CatalogoTipo).IsRequired().HasMaxLength(255);
             builder.Property(x => x.CatalogoCor).IsRequired().HasMaxLength(255);
             builder.Property(x => x.CatalogoCategoria).IsRequired().HasMaxLength(255);
