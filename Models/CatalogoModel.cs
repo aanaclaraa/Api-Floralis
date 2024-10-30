@@ -4,7 +4,7 @@
     {
         public int CatalogoId { get; set; }
 
-        public string CatalogotName { get; set; } = string.Empty;
+        public string CatalogoNome { get; set; } = string.Empty;
 
         public string CatalogoTipo { get; set; } = string.Empty;
 

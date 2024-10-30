@@ -41,7 +41,7 @@ namespace Api.Repositorios
             }
             else
             {
-                catalogo.CatalogotName =  catalogo.CatalogotName;
+                catalogo.CatalogoNome =  catalogo.CatalogoNome;
                 catalogo.CatalogoTipo = catalogo.CatalogoTipo;
                 catalogo.CatalogoCor = catalogo.CatalogoCor;
                 _dbContext.Catalogo.Update(catalogo);
